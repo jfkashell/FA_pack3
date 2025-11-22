@@ -1,0 +1,15 @@
+[CMD] A=2
+| A=2 | Assignment
+
+[CMD] B=3
+| A=2, B=3 | Assignment
+
+[CMD] C=A+B*2
+| A=2, B=3, C=8 | Arithmetic operation
+
+[CMD] D=C^B
+| A=2, B=3, C=8, D=512 | Arithmetic operation
+
+[CMD] print(D)
+| A=2, B=3, C=8, D=512 | Print D
+

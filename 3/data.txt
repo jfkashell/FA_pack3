@@ -1,0 +1,3 @@
+Ivanov Ivan Ivanovich 15 05 1990 M 50000.00
+Petrova Anna Sergeevna 20 10 1995 W 60000.00
+Sidorov Petr Petrovich 01 01 1980 M 75000.00
