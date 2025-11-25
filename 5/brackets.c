@@ -46,30 +46,41 @@ int check_brackets(const char *str) {
     if (!init_stack(&stack)) return -1;
 
     int result = 1;
+    int any_brackets = 0;
 
     for (int i = 0; str[i] != '\0'; i++) {
         char current = str[i];
 
-        if (current == '(' || current == '[' || current == '{' || current == '<') {
-            if (!push(&stack, current)) {
-                free(stack.data);
-                return -1;
+        if (current == '(' || current == '[' || current == '{' || current == '<' ||
+            current == ')' || current == ']' || current == '}' || current == '>') {
+            
+            any_brackets = 1;
+
+            if (current == '(' || current == '[' || current == '{' || current == '<') {
+                if (!push(&stack, current)) {
+                    free(stack.data);
+                    return -1;
+                }
             }
-        }
-        else if (current == ')' || current == ']' || current == '}' || current == '>') {
-            if (stack.top == 0) {
-                result = 0;
-                break;
-            }
-            char open = pop(&stack);
-            if (!is_matching_pair(open, current)) {
-                result = 0;
-                break;
+            else {
+                if (stack.top == 0) {
+                    result = 0;
+                    break;
+                }
+                char open = pop(&stack);
+                if (!is_matching_pair(open, current)) {
+                    result = 0;
+                    break;
+                }
             }
         }
     }
 
     if (stack.top > 0) {
+        result = 0;
+    }
+
+    if (any_brackets == 0) {
         result = 0;
     }
 
