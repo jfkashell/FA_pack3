@@ -1,19 +1,21 @@
 #include "lab3_task1.h"
 #include <stdlib.h>
 
-
 int bitwise_add(int a, int b) {
     while (b != 0) {
-        int carry = a & b; // вычисляем перенос
-        a = a ^ b;         // складываем биты без переноса
-        b = carry << 1;    // сдвигаем перенос влево
+        int carry = a & b;
+        a = a ^ b;
+        b = carry << 1;
     }
     return a;
 }
 
-// увеличение на 1
 int bitwise_increment(int a) {
     return bitwise_add(a, 1);
+}
+
+int bitwise_decrement(int a) {
+    return bitwise_add(a, ~0);
 }
 
 status_code convert_to_base_2r(unsigned int number, int r, char** result) {
@@ -53,7 +55,7 @@ status_code convert_to_base_2r(unsigned int number, int r, char** result) {
     buffer[index] = '\0';
 
     int start = 0;
-    int end = bitwise_add(index, -1);
+    int end = bitwise_decrement(index);
 
     while (start < end) {
         char temp = buffer[start];
@@ -61,7 +63,7 @@ status_code convert_to_base_2r(unsigned int number, int r, char** result) {
         buffer[end] = temp;
         
         start = bitwise_increment(start);
-        end = bitwise_add(end, -1);
+        end = bitwise_decrement(end);
     }
 
     return OK;
